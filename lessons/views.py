@@ -19,3 +19,8 @@ class LessonAPIView(APIView):
         ser = LessonSerializer(instances, many=True)
 
         return Response(data=ser.data)
+    def post(self, *args, **kwargs):
+        ser = LessonSerializer(data=self.request.data)
+        ser.is_valid(raise_exception=True)
+        ser.save()
+        return Response(data=ser.data, status=status.HTTP_201_CREATED)

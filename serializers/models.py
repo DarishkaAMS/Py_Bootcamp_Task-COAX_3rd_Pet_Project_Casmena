@@ -9,6 +9,6 @@ from rest_framework import serializers
 
 class LessonSerializer(serializers.ModelSerializer):
     id = serializers.IntegerField(read_only=True)
-    author = AuthorSerializer()
+    # author = AuthorSerializer()
     lesson_title = serializers.CharField()
     lesson_descr = serializers.CharField()
