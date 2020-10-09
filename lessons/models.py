@@ -1,18 +1,9 @@
 from django.db import models
 
-
-class Author(models.Model):
-    name = models.CharField(max_length=255)
-
-    class Meta:
-        db_table = "authors"
-
-    def __str__(self):
-        return f"{self.name}"
-
+from authentication.models import USER
 
 class Lesson(models.Model):
-    author = models.ForeignKey(Author, on_delete=models.CASCADE)
+    author = models.ForeignKey(USER, on_delete=models.CASCADE)
     lesson_title = models.CharField(max_length=25)
     lesson_descr = models.CharField(max_length=255)
     # video = models.FileField(upload_to='images/', blank=True, null=True) #!!!!

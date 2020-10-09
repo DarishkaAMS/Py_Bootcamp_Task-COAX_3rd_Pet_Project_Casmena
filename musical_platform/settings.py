@@ -39,6 +39,7 @@ INSTALLED_APPS = [
     'rest_framework',
     'lessons',
     'authentication',
+    'serializers',
 ]
 
 MIDDLEWARE = [

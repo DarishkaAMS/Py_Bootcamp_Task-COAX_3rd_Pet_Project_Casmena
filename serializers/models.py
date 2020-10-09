@@ -5,18 +5,10 @@ from rest_framework import serializers
 
 # Create your models here.
 
+#TODO Serializer
 
-class AuthorSerializer(serializers.Serializer):
-    id = serializers.IntegerField(read_only=True)
-    name = serializers.CharField()
-
-
-class LessonSerializer(serializers.Serializer):
+class LessonSerializer(serializers.ModelSerializer):
     id = serializers.IntegerField(read_only=True)
     author = AuthorSerializer()
     lesson_title = serializers.CharField()
     lesson_descr = serializers.CharField()
-
-    def test_serializer(self):
-        ser=LessonSerializer(instance=self.lesson_title)
-        pprint(ser.data)

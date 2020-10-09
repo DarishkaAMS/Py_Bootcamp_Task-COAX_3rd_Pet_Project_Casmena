@@ -1,6 +1,6 @@
 from django.urls import path, include
-from . import views
+from lessons import views
 
 urlpatterns = [
-    path("homepage", views.homepage, name="homepage"),
+    path("", views.LessonAPIView.as_view(), name="homepage"),
     ]
