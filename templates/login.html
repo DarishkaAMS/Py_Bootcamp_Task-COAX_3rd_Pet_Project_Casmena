@@ -3,11 +3,11 @@
 {% block body %}
 
     <div>
-        <p><h2 style = "color:blue">To visit this site <br> You must be of legal authorization in your company</h2></p>
-    </div> 
+        <p><h3>To visit this site </h3></p>
+    </div>
     <div>
-        <p><h4>Please provide your credentials</h4></p>
-    </div> 
+        <p><h5>Please provide your credentials</h5></p>
+    </div>
 {% if message %}
         <div>{{ message }}</div>
     {% endif %}
@@ -16,7 +16,7 @@
         {% csrf_token %}
         <input type="text" name="username" placeholder="Username" required="required">
         <input type="password" name="password" placeholder="Password" required="required">
-        <input type="submit" value="Login">
+        <input type="submit" value="Login" style="color: darkred;">
     </form>
 {% endblock%}
 

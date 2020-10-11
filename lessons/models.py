@@ -2,6 +2,7 @@ from django.db import models
 
 from authentication.models import USER
 
+
 class Lesson(models.Model):
     author = models.ForeignKey(USER, on_delete=models.CASCADE)
     lesson_title = models.CharField(max_length=25)

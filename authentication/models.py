@@ -9,7 +9,7 @@ class PermissionMixin(object):
 
 
 class UserManager(BaseUserManager):
-    def create_user(self, email, password=None, **extrafields):
+    def create_user(self, email, password=None, **extra_fields):
         user = self.model(email=email)
         user.set_password(password)
         user.save()

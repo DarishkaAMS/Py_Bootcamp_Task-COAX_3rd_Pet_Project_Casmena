@@ -1,10 +1,69 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <title>Homepage</title>
+    <meta charset="UTF-8", xmlns="http://www.w3.org/1999/xhtml">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
+    <title>Author Blog</title>
+    <style>
+   <style>
+    body {
+    background-color: GhostWhite!important;
+    text-align:center;
+    }
+    h3 {
+    color: Blue;
+    }
+    h1 {
+    color:  Blue;
+    }
+    a:link {
+    color: blue;
+    background-color: transparent;
+    text-decoration: none;
+    }
+
+    a:visited {
+    color: pink;
+    background-color: transparent;
+    text-decoration: none;
+    }
+    a:hover {
+      color: black;
+      background-color: transparent;
+      text-decoration: underline;
+    }
+    </style>
 </head>
-<body>
-Welcome to the Musical Platform Home Page!
+    <h3>
+        Welcome <br> to <br> Musical Platform!
+    </h3>
+
+<body style=text-align:center>
+
+    {% for lesson in lessons reversed %}
+        <p>
+            <a href="{% url 'article' art.id %}">
+            <span style="color: black">
+                {{art.id}}
+                {{ art.title}}
+                by
+                {{ art.author}}
+            </span>
+        </p>
+    {% endfor %}
+
+    {% block body%}
+    {% endblock %}
+
+    <button type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <span><a href="{% url 'logout' %}">Log Out</a></span>
+    </button>
+
+    <button type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <span><a href="{% url 'user' %}">Go to User Page</a></span>
+    </button>
+
 </body>
 </html>
