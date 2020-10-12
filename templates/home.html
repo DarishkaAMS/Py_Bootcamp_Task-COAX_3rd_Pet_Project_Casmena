@@ -8,7 +8,9 @@
     <li> <a href="{% url 'article_detail' post.pk %}"> {{ post.title }} </a>
         by {{ post.author}} <br/>
         {{ post.post_date}} </li>
-        {{ post.body | slice:":200" }}<br></li>
+    <li>{{ post.body | slice:":200" }}
+         {{ post.body | safe }}</li>
+
 
     <small>
         {% if user.is_authenticated %}

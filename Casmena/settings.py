@@ -39,6 +39,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'mysic_blog',
     'members',
+    'ckeditor',
 ]
 
 MIDDLEWARE = [
