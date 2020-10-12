@@ -1,11 +1,7 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>{{ post.title }}</title>
+{% extends 'base.html' %}
 
-</head>
-<body>
+{% block content %}
+
 {{ post.title }} by {{ post.author}} <br/>
 {{ post.body }}
 
@@ -13,5 +9,4 @@
 <br>
 <a href="{% url 'home' %}"> Back </a>
 
-</body>
-</html>
+{% endblock %}

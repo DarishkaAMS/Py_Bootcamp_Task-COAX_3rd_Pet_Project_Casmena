@@ -1,11 +1,7 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Casmena</title>
-</head>
-<body>
-<h1> Welcome to Casmena! </h1>
+{% extends 'base.html' %}
+
+{% block content %}
+<h1>Posts</h1>
 
 <ul>
 {% for post in object_list %}
@@ -15,5 +11,4 @@
 {% endfor %}
 </ul>
 
-</body>
-</html>
+{% endblock %}
