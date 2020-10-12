@@ -21,7 +21,7 @@ Update Post
             Only author can make changes of this lesson
     {% endif %}
 {% else %}
-        Please log in to make changes
+        Please <a href="{% url 'login' %}"> login </a> to make changes
 
 {% endif%}
 

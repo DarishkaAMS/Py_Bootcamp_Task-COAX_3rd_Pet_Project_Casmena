@@ -8,6 +8,8 @@
     <li> <a href="{% url 'article_detail' post.pk %}"> {{ post.title }} </a>
         by {{ post.author}} <br/>
         {{ post.post_date}} </li>
+        {{ post.body | slice:":200" }}<br></li>
+
     <small>
         {% if user.is_authenticated %}
             {% if user.id == post.author.id %}
@@ -15,8 +17,9 @@
                 <a href="{% url 'delete_post' post.pk %}">Delete</a>
             {% endif %}
         {% endif %}
+        <br>
     </small>
-    {{ post.body | slice:":200" }}</li>
+
 <br/>
 
 {% endfor %}

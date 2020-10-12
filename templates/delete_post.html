@@ -16,14 +16,14 @@ Delete Post
             {% csrf_token %}
             <strong>Are you sure you want to delete this lesson? </strong>
             <br>
-            <button class="btn btn-secondary">Delete</button>
+            <button class="btn btn-danger">Delete</button>
 
         </div>
     {% else %}
             Only author can delete this lesson
     {% endif %}
 {% else %}
-        Please log in to delete this lesson
+        Please <a href="{% url 'login' %}"> login </a> to delete this lesson
 
 {% endif%}
 
