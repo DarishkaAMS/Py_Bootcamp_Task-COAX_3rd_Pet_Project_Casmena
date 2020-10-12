@@ -5,17 +5,21 @@ Update Post
 {% block content %}
 
 {% if user.is_authenticated %}
-    <h1> Go ahead to <br> update your blog post here </h1>
-    <br>
-    <br>
+    {% if user.id == post.author.id %}
+        <h1> Go ahead to <br> update your blog post here </h1>
+        <br>
+        <br>
 
-    <div class="form-group"></div>
-    <form method="POST">
-        {% csrf_token %}
-        {{ form.as_p}}
-        <button class="btn btn-secondary">Post</button>
+        <div class="form-group"></div>
+        <form method="POST">
+            {% csrf_token %}
+            {{ form.as_p}}
+            <button class="btn btn-secondary">Post</button>
 
-    </div>
+        </div>
+    {% else %}
+            Only author can make changes of this lesson
+    {% endif %}
 {% else %}
         Please log in to make changes
 

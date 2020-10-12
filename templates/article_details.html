@@ -5,20 +5,26 @@
 
 {% block content %}
 
-<h1> {{ post.title }} </h1>
-<small> by {{ post.author}} </small><br/>
-<small>
-<i>{{ post.post_date }}</i>
-    <br>
-    <a href="{% url 'update_post' post.pk %}">Edit</a>
-    <a href="{% url 'delete_post' post.pk %}">Delete</a>
-</small>
-<br>
-<br/>
-{{ post.body }}
+    <h1> {{ post.title }} </h1>
+    <small> by {{ post.author}} </small><br/>
+    <small>
+    <i>{{ post.post_date }}</i>
+        <br>
+        <a href="{% url 'update_post' post.pk %}">Edit</a>
+        <a href="{% url 'delete_post' post.pk %}">Delete</a>
+    </small>
+    <br>    <br/>
+    {{ post.body }}
 
-<br/>
-<br/>
-<a href="{% url 'home' %}" class="btn btn-secondary"> Back </a>
+    <br><br>
+    <hr>
+    <br>
+    <form action="{% url 'like_post' post.pk %}" method="POST">
+        {% csrf_token %}
+        <button type="submit", name="post_id", value="{{ post.id }}", class="btn btn-primary btn-sm">Like</button> - {{ total_likes }} Likes
+    </form>
+    <br/>    <br/>
+    <a href="{% url 'home' %}" class="btn btn-secondary"> Back </a>
+
 
 {% endblock %}

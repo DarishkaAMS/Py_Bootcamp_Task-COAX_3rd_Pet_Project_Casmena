@@ -1,8 +1,10 @@
-from django.shortcuts import render
-from django.urls import reverse_lazy
+from django.shortcuts import render, get_object_or_404
+from django.urls import reverse_lazy, reverse
 from django.views.generic import ListView, DetailView, CreateView, UpdateView, DeleteView
+from django.http import HttpResponseRedirect
 from mysic_blog.models import Post
 from mysic_blog.forms import PostForm
+
 # Create your views here.
 
 
@@ -20,6 +22,13 @@ class HomeView(ListView):
 class ArticleDetailView(DetailView):
     model = Post
     template_name = "article_details.html"
+
+    def get_context_data(self, *args, **kwargs):
+        context = super(ArticleDetailView, self).get_context_data(*args, **kwargs)
+        obj = get_object_or_404(Post, id=self.kwargs['pk'])
+        total_likes = obj.total_likes()
+        context['total_likes'] = total_likes
+        return context
 
 
 class AddPostView(CreateView):
@@ -40,3 +49,8 @@ class DeletePostView(DeleteView):
     template_name = 'delete_post.html'
     success_url = reverse_lazy('home')
 
+
+def like_view(request, pk):
+    post = get_object_or_404(Post, id=request.POST.get('post_id'))
+    post.likes.add(request.user)
+    return HttpResponseRedirect(reverse('article_detail', args=[str(pk)]))
