@@ -16,10 +16,7 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path, include
 
-# from lessons.views import LessonAPIView
-
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', include('authentication.urls')),
-    path('lessons/', include('lessons.urls')),
 ]

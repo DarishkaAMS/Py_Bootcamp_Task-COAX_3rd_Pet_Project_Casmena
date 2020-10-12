@@ -15,16 +15,18 @@ from pathlib import Path
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve(strict=True).parent.parent
 
+
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/3.1/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = '08_xxe@4@=n(z4e^@jcci%g$&!&1u*52m*36suif3830j*+2u-'
+SECRET_KEY = 'w=+ecwtky_9w)e@-2a^&z#1b*jzxu60)azn#ww2-v@lxk1q_s-'
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
 ALLOWED_HOSTS = []
+
 
 # Application definition
 
@@ -37,10 +39,10 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
 
     'rest_framework',
-    'lessons',
     'authentication',
-    'serializers',
 ]
+
+AUTH_USER_MODEL = 'authentication.User'
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
@@ -87,17 +89,17 @@ TEMPLATES = [
 
 WSGI_APPLICATION = 'musical_platform.wsgi.application'
 
+
 # Database
 # https://docs.djangoproject.com/en/3.1/ref/settings/#databases
 
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
+        'NAME': BASE_DIR / 'db.sqlite3',
     }
 }
 
-AUTH_USER_MODEL = 'authentication.User'
 
 # Password validation
 # https://docs.djangoproject.com/en/3.1/ref/settings/#auth-password-validators
@@ -117,6 +119,7 @@ AUTH_PASSWORD_VALIDATORS = [
     },
 ]
 
+
 # Internationalization
 # https://docs.djangoproject.com/en/3.1/topics/i18n/
 
@@ -129,6 +132,7 @@ USE_I18N = True
 USE_L10N = True
 
 USE_TZ = True
+
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/3.1/howto/static-files/

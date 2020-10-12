@@ -22,13 +22,14 @@ def login_view(request):
         user = authenticate(request, email=email, password=password)
         if user is not None:
             login(request, user)
-            return HttpResponseRedirect(reverse("indeX"))
+            return HttpResponseRedirect(reverse("index"))
         else:
             return render(request, "login.html", {
                 "message": "Invalid credentials"
             })
     else:
         return render(request, "login.html")
+
 
 def logout_view(request):
     logout(request)

@@ -42,28 +42,7 @@
 
 <body style=text-align:center>
 
-    {% for lesson in lessons reversed %}
-        <p>
-            <a href="{% url 'article' art.id %}">
-            <span style="color: black">
-                {{art.id}}
-                {{ art.title}}
-                by
-                {{ art.author}}
-            </span>
-        </p>
-    {% endfor %}
 
-    {% block body%}
-    {% endblock %}
-
-    <button type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-        <span><a href="{% url 'logout' %}">Log Out</a></span>
-    </button>
-
-    <button type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-        <span><a href="{% url 'user' %}">Go to User Page</a></span>
-    </button>
 
 </body>
 </html>
