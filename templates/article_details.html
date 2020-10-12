@@ -7,6 +7,12 @@
 
 <h1> {{ post.title }} </h1>
 <small> by {{ post.author}} </small><br/>
+<small>
+<i>{{ post.post_date }}</i>
+    <br>
+    <a href="{% url 'update_post' post.pk %}">Edit</a>
+    <a href="{% url 'delete_post' post.pk %}">Delete</a>
+</small>
 <br>
 <br/>
 {{ post.body }}
