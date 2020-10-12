@@ -4,6 +4,7 @@ Delete Post
 {% endblock %}
 {% block content %}
 
+{% if user.is_authenticated %}
 <h1> You can delete <br> your blog post here </h1>
 <br>
 <br>
@@ -17,5 +18,9 @@ Delete Post
     <button class="btn btn-secondary">Delete</button>
 
 </div>
+{% else %}
+        Please log in to make changes
+
+{% endif%}
 
 {% endblock %}
