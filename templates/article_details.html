@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>{{ post.title }}</title>
+
+</head>
+<body>
+{{ post.title }} by {{ post.author}} <br/>
+{{ post.body }}
+
+<br>
+<br>
+<a href="{% url 'home' %}"> Back </a>
+
+</body>
+</html>
