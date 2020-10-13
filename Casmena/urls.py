@@ -47,8 +47,10 @@ urlpatterns = [
     path('members/', include('django.contrib.auth.urls')),
     path('members/', include('members.urls')),
     # path('', include(router.urls)),
+
     path('api-auth/', include('rest_framework.urls', namespace='rest_framework')),
     path('api-token-auth/', obtain_jwt_token),
     path('', LessonAPIView.as_view()),
+
 ]
 

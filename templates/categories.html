@@ -1,0 +1,33 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+{% if category_posts %}
+
+    <h1> Category - {{ cats }} </h1>
+
+    {% for post in category_posts %}
+        <ul style ="list-style-type:none;">
+            <li> <a href="{% url 'article_detail' post.pk %}"> {{ post.title }} </a>
+                - {{ post.category }} -
+                by {{ post.author}} <br/>
+                {{ post.post_date}} </li>
+            <li>{{ post.body | slice:":200" | safe }} </li>
+
+            <small>
+                {% if user.is_authenticated %}
+                    {% if user.id == post.author.id %}
+                        <a href="{% url 'update_post' post.pk %}">Edit</a>
+                        <a href="{% url 'delete_post' post.pk %}">Delete</a>
+                    {% endif %}
+                {% endif %}
+            <br>
+            </small>
+        </ul>
+    {% endfor %}
+
+{% else %}
+    Sorry... This page is not exists...
+{% endif %}
+
+{% endblock %}

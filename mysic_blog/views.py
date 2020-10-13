@@ -4,7 +4,7 @@ from django.views.generic import ListView, DetailView, CreateView, UpdateView, D
 from django.http import HttpResponseRedirect, JsonResponse
 from rest_framework.views import APIView
 
-from mysic_blog.models import Post
+from mysic_blog.models import Post, Category
 from mysic_blog.forms import PostForm
 from rest_framework.decorators import api_view
 from rest_framework.response import Response
@@ -49,6 +49,18 @@ class AddPostView(CreateView):
     form_class = PostForm
     template_name = "add_post.html"
     # fields = '__all__'
+
+
+class AddCategoryView(CreateView):
+    model = Category
+    # form_class = PostForm
+    template_name = "add_category.html"
+    fields = '__all__'
+
+
+def category_view(request, cats):
+    category_posts = Post.objects.filter(category=cats.replace('-', ' '))
+    return render(request, 'categories.html', {'cats': cats.title().replace('-', ' '), 'category_posts': category_posts})
 
 
 class UpdatePostView(UpdateView):
