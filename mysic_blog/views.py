@@ -6,13 +6,36 @@ from rest_framework.views import APIView
 
 from mysic_blog.models import Post, Category
 from mysic_blog.forms import PostForm
+
 from rest_framework.decorators import api_view
 from rest_framework.response import Response
+from rest_framework.reverse import reverse
+from rest_framework import renderers, generics
+
 from mysic_blog.serializer import PostSerializer
+
+
 # Create your views here.
 
 
-class HomeView(ListView): #TRUE ONE -> TO HomeAPIView
+@api_view(['GET'])
+def api_root(request, format=None):
+    return Response({
+        'users': reverse('user-list', request=request, format=format),
+        'posts': reverse('post-list', request=request, format=format)
+    })
+
+
+class LessonHightlight(generics.GenericAPIView):
+    queryset = Post.objects.all()
+    renderer_classes = [renderers.StaticHTMLRenderer]
+
+    def get(self, request, *args, **kwargs):
+        post = self.get_object()
+        return Response(post.highlighted)
+
+
+class HomeView(ListView):  # TRUE ONE -> TO HomeAPIView
     model = Post
     template_name = 'home.html'
     # ordering = ['-post_date']
@@ -25,11 +48,11 @@ class HomeView(ListView): #TRUE ONE -> TO HomeAPIView
         return context
 
 
-class LessonAPIView(APIView):
-    def get(self, *args, **kwargs):
-        instances = Post.objects.all()
-        ser = PostSerializer(instances, many=True)
-        return Response(data=ser.data)
+# class LessonAPIView(APIView):
+#     def get(self, *args, **kwargs):
+#         instances = Post.objects.all()
+#         ser = PostSerializer(instances, many=True)
+#         return Response(data=ser.data)
 
 
 class ArticleDetailView(DetailView):
@@ -69,7 +92,8 @@ class AddCategoryView(CreateView):
 
 def category_view(request, cats):
     category_posts = Post.objects.filter(category=cats.replace('-', ' '))
-    return render(request, 'categories.html', {'cats': cats.title().replace('-', ' '), 'category_posts': category_posts})
+    return render(request, 'categories.html',
+                  {'cats': cats.title().replace('-', ' '), 'category_posts': category_posts})
 
 
 class UpdatePostView(UpdateView):
@@ -95,7 +119,6 @@ def like_view(request, pk):
         liked = True
     # post.likes.add(request.user)
     return HttpResponseRedirect(reverse('article_detail', args=[str(pk)]))
-
 
     # # return Response('API BASE POINT', safe=False)
     # return HttpResponseRedirect(reverse('article_detail', args=[str(pk)]))

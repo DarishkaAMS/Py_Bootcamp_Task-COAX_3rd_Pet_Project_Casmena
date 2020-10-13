@@ -21,7 +21,7 @@ from rest_framework_jwt.views import obtain_jwt_token
 # from mysic_blog.views import HomeAPIView
 
 # Serializers define the API representation.
-from mysic_blog.views import LessonAPIView
+from mysic_blog.views import api_root #LessonAPIView
 
 
 class UserSerializer(serializers.HyperlinkedModelSerializer):
@@ -43,14 +43,18 @@ router.register(r'users', UserViewSet)
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('', include('mysic_blog.urls')),
+    path('', include('mysic_blog.urls'), name='base_home'),
+    # path('', LessonAPIView.as_view(), name='home'),
+    # path('', include(router.urls)),
+    path('', api_root),
+
     path('members/', include('django.contrib.auth.urls')),
     path('members/', include('members.urls')),
-    # path('', include(router.urls)),
 
     path('api-auth/', include('rest_framework.urls', namespace='rest_framework')),
     path('api-token-auth/', obtain_jwt_token),
-    path('', LessonAPIView.as_view()),
-
 ]
 
+# base_urlpatterns = [
+#
+# ]
