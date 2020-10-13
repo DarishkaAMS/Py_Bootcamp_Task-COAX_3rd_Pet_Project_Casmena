@@ -1,7 +1,6 @@
 from django.urls import path, include
 # from mysic_blog import views -without class
-from mysic_blog.views import HomeView, ArticleDetailView, AddPostView, UpdatePostView, DeletePostView, like_view, \
-    LessonAPIView, AddCategoryView, category_view
+from mysic_blog.views import HomeView, ArticleDetailView, AddPostView, UpdatePostView, DeletePostView, like_view, LessonAPIView, AddCategoryView, category_view
 
 # HomeAPIView
 

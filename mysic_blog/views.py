@@ -37,7 +37,9 @@ class ArticleDetailView(DetailView):
     template_name = "article_details.html"
 
     def get_context_data(self, *args, **kwargs):
+        cat_menu = Category.objects.all()
         context = super(ArticleDetailView, self).get_context_data(*args, **kwargs)
+
         obj = get_object_or_404(Post, id=self.kwargs['pk'])
         total_likes = obj.total_likes()
 
@@ -45,14 +47,9 @@ class ArticleDetailView(DetailView):
         if obj.likes.filter(id=self.request.user.id).exists():
             liked = True
 
+        context['cat_menu'] = cat_menu
         context['total_likes'] = total_likes
         context['liked'] = liked
-        return context
-
-    def get_context_data(self, *args, **kwargs):
-        cat_menu = Category.objects.all()
-        context = super(ArticleDetailView, self).get_context_data(*args, **kwargs)
-        context['cat_menu'] = cat_menu
         return context
 
 
@@ -96,5 +93,9 @@ def like_view(request, pk):
     else:
         post.likes.add(request.user)
         liked = True
-    # return Response('API BASE POINT', safe=False)
+    # post.likes.add(request.user)
     return HttpResponseRedirect(reverse('article_detail', args=[str(pk)]))
+
+
+    # # return Response('API BASE POINT', safe=False)
+    # return HttpResponseRedirect(reverse('article_detail', args=[str(pk)]))
