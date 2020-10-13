@@ -9,10 +9,10 @@ Add Lesson
 <br>
 
 <div class="form-group"></div>
-<form method="POST">
-    {% csrf_token %}
-    {{ form.media}}
-    {{ form.as_p}}
+    <form method="POST" enctype="multipart/form-data">
+        {% csrf_token %}
+        {{ form.media}}
+        {{ form.as_p}}
     <button class="btn btn-secondary">Ready</button>
 
 </div>
