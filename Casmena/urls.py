@@ -18,16 +18,18 @@ from django.urls import path, include
 from django.contrib.auth.models import User
 from rest_framework import routers, serializers, viewsets
 from rest_framework_jwt.views import obtain_jwt_token
+from members import views
 # from mysic_blog.views import HomeAPIView
 
 # Serializers define the API representation.
-from mysic_blog.views import api_root #LessonAPIView
+from mysic_blog.views import api_root  # LessonAPIView
 
 
 class UserSerializer(serializers.HyperlinkedModelSerializer):
     class Meta:
         model = User
         fields = ['url', 'username', 'email', 'is_staff', 'first_name', 'last_name']
+
 
 # ViewSets define the view behavior.
 
@@ -38,20 +40,25 @@ class UserViewSet(viewsets.ModelViewSet):
 
 
 # Routers provide an easy way of automatically determining the URL conf.
+
 router = routers.DefaultRouter()
 router.register(r'users', UserViewSet)
+# router.register(r'users', views.UserViewSet)
+router.register(r'groups', views.GroupViewSet)
 
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', include('mysic_blog.urls'), name='base_home'),
     # path('', LessonAPIView.as_view(), name='home'),
-    # path('', include(router.urls)),
+
     path('', api_root),
 
     path('members/', include('django.contrib.auth.urls')),
     path('members/', include('members.urls')),
 
+    path('', include(router.urls)),
     path('api-auth/', include('rest_framework.urls', namespace='rest_framework')),
+
     path('api-token-auth/', obtain_jwt_token),
 ]
 

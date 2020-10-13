@@ -1,10 +1,7 @@
 from django.db import models
 from rest_framework import serializers
 from mysic_blog.models import Post
-from django.contrib.auth.models import User
-
-
-# class UserSerializer(serializers.Serializer):
+from django.contrib.auth.models import User, Group
 
 
 class PostSerializer(serializers.Serializer):
