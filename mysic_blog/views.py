@@ -18,6 +18,12 @@ class HomeView(ListView): #TRUE ONE -> TO HomeAPIView
     # ordering = ['-post_date']
     ordering = ['-id']
 
+    def get_context_data(self, *args, **kwargs):
+        cat_menu = Category.objects.all()
+        context = super(HomeView, self).get_context_data(*args, **kwargs)
+        context['cat_menu'] = cat_menu
+        return context
+
 
 class LessonAPIView(APIView):
     def get(self, *args, **kwargs):
@@ -41,6 +47,12 @@ class ArticleDetailView(DetailView):
 
         context['total_likes'] = total_likes
         context['liked'] = liked
+        return context
+
+    def get_context_data(self, *args, **kwargs):
+        cat_menu = Category.objects.all()
+        context = super(ArticleDetailView, self).get_context_data(*args, **kwargs)
+        context['cat_menu'] = cat_menu
         return context
 
 
