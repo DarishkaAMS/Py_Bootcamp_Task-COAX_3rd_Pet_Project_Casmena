@@ -1,22 +1,29 @@
 from django.shortcuts import render, get_object_or_404
 from django.urls import reverse_lazy, reverse
 from django.views.generic import ListView, DetailView, CreateView, UpdateView, DeleteView
-from django.http import HttpResponseRedirect
+from django.http import HttpResponseRedirect, JsonResponse
+from rest_framework.views import APIView
+
 from mysic_blog.models import Post
 from mysic_blog.forms import PostForm
-
+from rest_framework.decorators import api_view
+from rest_framework.response import Response
+from mysic_blog.serializer import PostSerializer
 # Create your views here.
 
 
-# def home(request):
-#     return render(request, 'home.html', {})
-
-
-class HomeView(ListView):
+class HomeView(ListView): #TRUE ONE -> TO HomeAPIView
     model = Post
     template_name = 'home.html'
     # ordering = ['-post_date']
     ordering = ['-id']
+
+
+class LessonAPIView(APIView):
+    def get(self, *args, **kwargs):
+        instances = Post.objects.all()
+        ser = PostSerializer(instances, many=True)
+        return Response(data=ser.data)
 
 
 class ArticleDetailView(DetailView):
@@ -65,4 +72,5 @@ def like_view(request, pk):
     else:
         post.likes.add(request.user)
         liked = True
+    # return Response('API BASE POINT', safe=False)
     return HttpResponseRedirect(reverse('article_detail', args=[str(pk)]))
