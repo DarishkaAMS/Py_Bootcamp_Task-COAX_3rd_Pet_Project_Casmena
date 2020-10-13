@@ -39,6 +39,13 @@ class ShowProfilePageView(DetailView):
         return context
 
 
+class EditProfilePageView(generic.UpdateView):
+    model = Profile
+    template_name = 'edit_profile.html'
+    fields = ['profile_pic']
+    success_url = reverse_lazy('home')
+
+
 class UserViewSet(viewsets.ModelViewSet):
     """
     API endpoint that allows users to be viewed or edited.
