@@ -49,23 +49,22 @@ router.register(r'groups', views.GroupViewSet)
 
 urlpatterns = [
                   path('admin/', admin.site.urls),
-                  path('', include('mysic_blog.urls'), name='base_home'),
-                  # path('', LessonAPIView.as_view(), name='home'),
                   path('api/v1/', include('mysic_blog.urls')),
 
+                  path('', include('mysic_blog.urls'), name='base_home'),
                   path('', api_root),
 
                   path('members/', include('django.contrib.auth.urls')),
                   path('members/', include('members.urls')),
 
-                  path('', include(router.urls)),
+                  # path('', include(router.urls)),
                   path('api-auth/', include('rest_framework.urls', namespace='rest_framework')),
 
                   path('api-token-auth/', obtain_jwt_token),
                   path('ckeditor/', include('ckeditor_uploader.urls')),
               ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
 
+
 # base_urlpatterns = [
 #
 # ]
-

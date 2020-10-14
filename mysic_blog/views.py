@@ -26,15 +26,6 @@ def api_root(request, format=None):
     })
 
 
-class LessonHightlight(generics.GenericAPIView):
-    queryset = Post.objects.all()
-    renderer_classes = [renderers.StaticHTMLRenderer]
-
-    def get(self, request, *args, **kwargs):
-        post = self.get_object()
-        return Response(post.highlighted)
-
-
 class HomeView(ListView):  # TRUE ONE -> TO HomeAPIView
     model = Post
     template_name = 'home.html'

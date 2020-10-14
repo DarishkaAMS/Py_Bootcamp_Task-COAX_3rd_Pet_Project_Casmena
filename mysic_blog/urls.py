@@ -1,15 +1,9 @@
 from django.urls import path, include
 from mysic_blog import views
 from mysic_blog.views import HomeView, ArticleDetailView, AddPostView, UpdatePostView, DeletePostView, like_view, \
-    AddCategoryView, category_view, api_root, LessonHightlight, LessonAPIView
-
-# LessonAPIView,
-# api_patterns = [
-#     path('', LessonAPIView().as_view()),
-# ]
+    AddCategoryView, category_view, api_root, LessonAPIView
 
 urlpatterns = [
-    # path('', views.home, name="home") #without class
     path('', HomeView.as_view(), name='home'),
 
     path('article/<int:pk>', ArticleDetailView.as_view(), name='article_detail'),
@@ -21,7 +15,6 @@ urlpatterns = [
     path('category/<str:cats>/', category_view, name="category"),
 
     path('like/<int:pk>', like_view, name='like_post'),
-    path('article/<int:pk>/highlight/', LessonHightlight.as_view()),
 
     path('mysic_blog/', views.LessonAPIView.as_view()),
 
