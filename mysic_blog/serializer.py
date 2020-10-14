@@ -1,9 +1,12 @@
 from django.db import models
 from rest_framework import serializers
 from mysic_blog.models import Post
+from django.contrib.auth.models import User
 
 
 class PostSerializer(serializers.ModelSerializer):
+    author = serializers.SlugRelatedField(slug_field='username', read_only=True) #May to Many fields to see the name
+
     class Meta:
         model = Post
         fields = ('title', 'title_tag', 'author', 'body', 'post_date', 'likes')
@@ -14,7 +17,6 @@ class PostSerializer(serializers.ModelSerializer):
         # body = serializers.CharField(blank=True, null=True)
         # post_date = serializers.CharField(auto_now_add=True)
         # likes = serializers.CharField(User, related_name='blog_posts')
-
 
     # def create(self, validated_data):
     #     return Post.objects.create(**validated_data)
@@ -28,3 +30,10 @@ class PostSerializer(serializers.ModelSerializer):
     #     instance.likes = validated_data.get('likes', instance.likes)
     #     instance.save()
     #     return instance
+
+
+class PostDetailSerializer(serializers.ModelSerializer):
+    author = serializers.SlugRelatedField(slug_field='username', read_only=True)  # May to Many fields to see the name
+    class Meta:
+        model = Post
+        exclude = ('title_tag',)

@@ -12,7 +12,7 @@ from rest_framework.response import Response
 from rest_framework.reverse import reverse
 from rest_framework import renderers, generics
 
-from mysic_blog.serializer import PostSerializer
+from mysic_blog.serializer import PostSerializer, PostDetailSerializer
 
 
 # Create your views here.
@@ -74,6 +74,13 @@ class ArticleDetailView(DetailView):
         context['total_likes'] = total_likes
         context['liked'] = liked
         return context
+
+
+class ArticleDetailAPIView(APIView):
+    def get(self, request, pk):
+        instances = Post.objects.get(id=pk)
+        ser = PostDetailSerializer(instances)
+        return Response(data=ser.data)
 
 
 class AddPostView(CreateView):
