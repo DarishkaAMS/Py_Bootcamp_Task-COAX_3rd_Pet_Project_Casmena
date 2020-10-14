@@ -1,7 +1,7 @@
 from django.urls import path, include
-# from mysic_blog import views -without class
+from mysic_blog import views
 from mysic_blog.views import HomeView, ArticleDetailView, AddPostView, UpdatePostView, DeletePostView, like_view, \
-    AddCategoryView, category_view, api_root, LessonHightlight
+    AddCategoryView, category_view, api_root, LessonHightlight, LessonAPIView
 
 # LessonAPIView,
 # api_patterns = [
@@ -23,6 +23,6 @@ urlpatterns = [
     path('like/<int:pk>', like_view, name='like_post'),
     path('article/<int:pk>/highlight/', LessonHightlight.as_view()),
 
-    # path('sergi/', LessonAPIView.as_view(), name='sergi'),
+    path('mysic_blog/', views.LessonAPIView.as_view()),
 
 ]

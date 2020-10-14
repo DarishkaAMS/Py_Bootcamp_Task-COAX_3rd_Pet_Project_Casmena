@@ -51,6 +51,7 @@ urlpatterns = [
                   path('admin/', admin.site.urls),
                   path('', include('mysic_blog.urls'), name='base_home'),
                   # path('', LessonAPIView.as_view(), name='home'),
+                  path('api/v1/', include('mysic_blog.urls')),
 
                   path('', api_root),
 

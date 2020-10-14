@@ -48,11 +48,11 @@ class HomeView(ListView):  # TRUE ONE -> TO HomeAPIView
         return context
 
 
-# class LessonAPIView(APIView):
-#     def get(self, *args, **kwargs):
-#         instances = Post.objects.all()
-#         ser = PostSerializer(instances, many=True)
-#         return Response(data=ser.data)
+class LessonAPIView(APIView):
+    def get(self, *args, **kwargs):
+        instances = Post.objects.all()
+        ser = PostSerializer(instances, many=True)
+        return Response(data=ser.data)
 
 
 class ArticleDetailView(DetailView):
