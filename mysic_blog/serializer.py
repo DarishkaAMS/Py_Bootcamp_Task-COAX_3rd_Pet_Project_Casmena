@@ -1,6 +1,7 @@
 from django.db import models
 from rest_framework import serializers
 from mysic_blog.models import Post
+from mysic_blog.forms import PostForm
 from django.contrib.auth.models import User
 
 
@@ -34,6 +35,14 @@ class PostSerializer(serializers.ModelSerializer):
 
 class PostDetailSerializer(serializers.ModelSerializer):
     author = serializers.SlugRelatedField(slug_field='username', read_only=True)  # May to Many fields to see the name
+
     class Meta:
         model = Post
         exclude = ('title_tag',)
+
+
+class AddPostSerializer(serializers.ModelSerializer):
+
+    class Meta:
+        model = Post
+        fields = '__all__'

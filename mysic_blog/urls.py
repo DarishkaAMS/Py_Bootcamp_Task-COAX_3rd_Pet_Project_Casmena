@@ -24,6 +24,8 @@ urlpatterns = [
     path('article/<int:pk>/highlight/', LessonHightlight.as_view()),
 
     path('mysic_blog/', views.LessonAPIView.as_view()),
+
     path('mysic_blog/<int:pk>', views.ArticleDetailAPIView.as_view()),
+    path('mysic_blog/add_post/', views.AddPostAPIView.as_view()),
 
 ]

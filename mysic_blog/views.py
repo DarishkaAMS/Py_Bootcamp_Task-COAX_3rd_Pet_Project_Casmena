@@ -12,7 +12,7 @@ from rest_framework.response import Response
 from rest_framework.reverse import reverse
 from rest_framework import renderers, generics
 
-from mysic_blog.serializer import PostSerializer, PostDetailSerializer
+from mysic_blog.serializer import PostSerializer, PostDetailSerializer, AddPostSerializer
 
 
 # Create your views here.
@@ -90,17 +90,12 @@ class AddPostView(CreateView):
     # fields = '__all__'
 
 
-class AddCategoryView(CreateView):
-    model = Category
-    # form_class = PostForm
-    template_name = "add_category.html"
-    fields = '__all__'
-
-
-def category_view(request, cats):
-    category_posts = Post.objects.filter(category=cats.replace('-', ' '))
-    return render(request, 'categories.html',
-                  {'cats': cats.title().replace('-', ' '), 'category_posts': category_posts})
+class AddPostAPIView(APIView):
+    def post(self, request):
+        add_post = AddPostSerializer(data=request.data)
+        if add_post.is_valid():
+            add_post.save()
+        return Response(status=201)
 
 
 class UpdatePostView(UpdateView):
@@ -113,6 +108,19 @@ class DeletePostView(DeleteView):
     model = Post
     template_name = 'delete_post.html'
     success_url = reverse_lazy('home')
+
+
+class AddCategoryView(CreateView):
+    model = Category
+    # form_class = PostForm
+    template_name = "add_category.html"
+    fields = '__all__'
+
+
+def category_view(request, cats):
+    category_posts = Post.objects.filter(category=cats.replace('-', ' '))
+    return render(request, 'categories.html',
+                  {'cats': cats.title().replace('-', ' '), 'category_posts': category_posts})
 
 
 def like_view(request, pk):
