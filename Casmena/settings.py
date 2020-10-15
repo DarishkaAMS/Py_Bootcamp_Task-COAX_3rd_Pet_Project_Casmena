@@ -38,6 +38,7 @@ INSTALLED_APPS = [
 
     'mysic_blog',
     'members',
+    'contacts',
 
     'ckeditor',
     'rest_framework',
@@ -100,6 +101,9 @@ TEMPLATES = [
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
             ],
+            'libraries':{
+                'contact_tags': 'contacts.contact_tags',
+            }
         },
     },
 ]

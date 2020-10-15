@@ -1,0 +1,11 @@
+<h1> Newsletter </h1>
+
+<p> By subscribing to our mailing list you will always get latest news and updates from Casmena" </p>
+
+<form action="{% url 'contact' %}" method="POST">
+    {% csrf_token %}
+    {{ contact_form}}
+    {{ form.as_p}}
+<!--    <input type="email" name="email" class="editContent" placeholder="Your e-mail">-->
+    <button class="btn btn-secondary">Register</button>
+</form>
